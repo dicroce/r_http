@@ -1,7 +1,7 @@
 # r_http
 
 r_http provides a simple, easy to use http api.
-
+```
 // Connect a socket
 r_socket socket;
 socket.connect("127.0.0.1", port);
@@ -20,3 +20,4 @@ r_client_response response;
 response.read_response(socket);
 
 auto responseBody = response.get_body_as_string();
+```
