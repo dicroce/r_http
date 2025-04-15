@@ -11,6 +11,7 @@ FetchContent_Declare(
     r_utils
     GIT_REPOSITORY https://github.com/dicroce/r_utils.git
     GIT_TAG        main
+    FIND_PACKAGE_ARGS NAMES r_utils
 )
 FetchContent_MakeAvailable(r_utils)
 
@@ -39,8 +40,9 @@ add_library(
 )
 
 target_include_directories(
-    r_http PUBLIC 
-    include
+    r_http PUBLIC
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+    $<INSTALL_INTERFACE:include>
 )
 
 target_link_libraries(
@@ -49,3 +51,5 @@ target_link_libraries(
 )
 
 add_subdirectory(ut)
+
+configure_dev_package("r_http" "A C++ http library for making clients and servers.")
