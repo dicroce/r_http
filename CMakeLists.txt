@@ -52,4 +52,6 @@ target_link_libraries(
 
 add_subdirectory(ut)
 
+if(PROJECT_IS_TOP_LEVEL)
 configure_dev_package("r_http" "A C++ http library for making clients and servers.")
+endif()
