@@ -1,5 +1,5 @@
 Architecture: amd64
-Description: r_http built using CMake
+Description: A C++ http library for making clients and servers.
 Maintainer: dicroce@gmail.com
 Package: r_http
 Priority: optional
