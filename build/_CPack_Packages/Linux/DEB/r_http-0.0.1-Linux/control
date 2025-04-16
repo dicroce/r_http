@@ -1,9 +1,0 @@
-Architecture: amd64
-Description: A C++ http library for making clients and servers.
-Maintainer: dicroce@gmail.com
-Package: r_http
-Priority: optional
-Section: devel
-Version: 0.0.1
-Installed-Size: 6921
-

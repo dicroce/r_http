@@ -1,2 +1,0 @@
-/usr/bin/ar qc libr_http.a CMakeFiles/r_http.dir/source/r_client_request.cpp.o CMakeFiles/r_http.dir/source/r_client_response.cpp.o CMakeFiles/r_http.dir/source/r_http_exception.cpp.o CMakeFiles/r_http.dir/source/r_methods.cpp.o CMakeFiles/r_http.dir/source/r_range_request_generator.cpp.o CMakeFiles/r_http.dir/source/r_server_request.cpp.o CMakeFiles/r_http.dir/source/r_server_response.cpp.o CMakeFiles/r_http.dir/source/r_uri.cpp.o CMakeFiles/r_http.dir/source/r_utils.cpp.o CMakeFiles/r_http.dir/source/r_web_server.cpp.o
-/usr/bin/ranlib libr_http.a
