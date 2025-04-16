@@ -1,0 +1,16 @@
+/usr/local/include/r_http/r_uri.h
+/usr/local/include/r_http/r_server_response.h
+/usr/local/include/r_http/r_client_response.h
+/usr/local/include/r_http/r_http_exception.h
+/usr/local/include/r_http/r_status_codes.h
+/usr/local/include/r_http/r_web_server.h
+/usr/local/include/r_http/r_server_request.h
+/usr/local/include/r_http/r_client_request.h
+/usr/local/include/r_http/r_methods.h
+/usr/local/include/r_http/r_range_request_generator.h
+/usr/local/include/r_http/r_utils.h
+/usr/local/lib/libr_http.a
+/usr/local/lib/cmake/r_http/r_httpConfig.cmake
+/usr/local/lib/cmake/r_http/r_httpConfigVersion.cmake
+/usr/local/lib/cmake/r_http/r_httpTargets.cmake
+/usr/local/lib/cmake/r_http/r_httpTargets-debug.cmake

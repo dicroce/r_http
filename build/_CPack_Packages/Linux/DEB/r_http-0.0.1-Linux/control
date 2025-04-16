@@ -1,0 +1,9 @@
+Architecture: amd64
+Description: r_http built using CMake
+Maintainer: dicroce@gmail.com
+Package: r_http
+Priority: optional
+Section: devel
+Version: 0.0.1
+Installed-Size: 6921
+

@@ -1,0 +1,1 @@
+/usr/bin/c++ -g CMakeFiles/r_http_ut.dir/source/framework.cpp.o CMakeFiles/r_http_ut.dir/source/test_r_http.cpp.o -o r_http_ut  ../libr_http.a -lr_utils -lpthread -ldl -luuid 
