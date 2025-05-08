@@ -46,7 +46,7 @@ r_server_request& r_server_request::operator = (const r_server_request& obj)
     return *this;
 }
 
-void r_server_request::read_request(r_utils::r_stream_io& socket)
+void r_server_request::read_request(r_utils::r_socket_base& socket)
 {
     list<string> requestLines;
 
@@ -188,7 +188,7 @@ map<string,string> r_server_request::get_post_vars() const
     return _postVars;
 }
 
-void r_server_request::_clean_socket(r_stream_io& socket, char** writer)
+void r_server_request::_clean_socket(r_socket_base& socket, char** writer)
 {
     if(!socket.valid())
         R_STHROW(r_http_exception_generic, ("Invalid Socket"));
@@ -211,7 +211,7 @@ void r_server_request::_clean_socket(r_stream_io& socket, char** writer)
     }
 }
 
-void r_server_request::_read_header_line(r_stream_io& socket, char* writer, bool firstLine)
+void r_server_request::_read_header_line(r_socket_base& socket, char* writer, bool firstLine)
 {
     bool lineDone = false;
     size_t bytesReadThisLine = 0;
@@ -272,7 +272,7 @@ void r_server_request::_process_request_lines(const list<string>& requestLines)
     }
 }
 
-void r_server_request::_process_body(r_stream_io& socket)
+void r_server_request::_process_body(r_socket_base& socket)
 {
     auto cl = get_header("Content-Length");
 

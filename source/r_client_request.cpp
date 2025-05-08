@@ -69,7 +69,7 @@ void r_client_request::set_method( int method )
     _method = method;
 }
 
-void r_client_request::write_request( r_stream_io& socket ) const
+void r_client_request::write_request( r_socket_base& socket ) const
 {
     std::string msgHeader = _get_headers_as_string( socket );
 
@@ -130,7 +130,7 @@ void r_client_request::set_body( const std::string& body )
     set_body((uint8_t*)body.c_str(), body.length());
 }
 
-std::string r_client_request::_get_headers_as_string( r_stream_io& socket ) const
+std::string r_client_request::_get_headers_as_string( r_socket_base& socket ) const
 {
     std::string msgHeader;
     msgHeader = method_text( _method ) + " " + _uri.get_full_raw_uri() + " HTTP/1.1\r\nHost: " + _host + ":" + r_string_utils::int_to_s( _hostPort ) + "\r\n";

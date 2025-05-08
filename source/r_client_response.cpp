@@ -61,7 +61,7 @@ r_client_response& r_client_response::operator = (const r_client_response& rhs)
     return *this;
 }
 
-void r_client_response::read_response(r_utils::r_stream_io& socket)
+void r_client_response::read_response(r_utils::r_socket_base& socket)
 {
 READ_BEGIN:
     list<string> requestLines;
@@ -131,7 +131,7 @@ READ_BEGIN:
     _process_body(socket);
 }
 
-void r_client_response::_clean_socket(r_stream_io& socket, char** writer)
+void r_client_response::_clean_socket(r_socket_base& socket, char** writer)
 {
     if(!socket.valid())
         R_STHROW(r_http_exception_generic, ("Invalid Socket"));
@@ -152,7 +152,7 @@ void r_client_response::_clean_socket(r_stream_io& socket, char** writer)
     }
 }
 
-void r_client_response::_read_header_line(r_stream_io& socket, char* writer, bool firstLine)
+void r_client_response::_read_header_line(r_socket_base& socket, char* writer, bool firstLine)
 {
     char lastTwoChars[2] = {0, 0};
     size_t bytesReadThisLine = 0;
@@ -210,7 +210,7 @@ void r_client_response::_process_request_lines(const list<string>& requestLines)
     }
 }
 
-void r_client_response::_process_body(r_stream_io& socket)
+void r_client_response::_process_body(r_socket_base& socket)
 {
     /// Get the body if we were given a Content Length
     auto found = _headerParts.find( "content-length" );
@@ -318,7 +318,7 @@ void r_client_response::register_part_callback( part_callback pb )
     _partCallback = pb;
 }
 
-void r_client_response::_read_chunked_body(r_stream_io& socket)
+void r_client_response::_read_chunked_body(r_socket_base& socket)
 {
     char lineBuf[MAX_HEADER_LINE+1];
     bool moreChunks = true;
@@ -388,7 +388,7 @@ bool r_client_response::_embed_null(char* lineBuf)
     return false;
 }
 
-void r_client_response::_read_multi_part(r_stream_io& socket)
+void r_client_response::_read_multi_part(r_socket_base& socket)
 {
     char lineBuf[MAX_HEADER_LINE+1];
     bool moreParts = true;
@@ -425,7 +425,7 @@ void r_client_response::_read_multi_part(r_stream_io& socket)
     }
 }
 
-void r_client_response::_read_end_of_line(r_stream_io& socket)
+void r_client_response::_read_end_of_line(r_socket_base& socket)
 {
     char lineEnd[2] = {0, 0};
 
@@ -438,7 +438,7 @@ void r_client_response::_read_end_of_line(r_stream_io& socket)
         R_STHROW(r_http_exception_generic, ("A chunk line didn't end with appropriate terminator."));
 }
 
-map<string,string> r_client_response::_read_multi_header_lines(r_stream_io& socket, char* lineBuf)
+map<string,string> r_client_response::_read_multi_header_lines(r_socket_base& socket, char* lineBuf)
 {
     std::list<string> partLines;
 
@@ -475,7 +475,7 @@ void r_client_response::debug_print_request()
     fflush(stdout);
 }
 
-void r_client_response::_consume_footer(r_stream_io& socket)
+void r_client_response::_consume_footer(r_socket_base& socket)
 {
     char lineBuf[MAX_HEADER_LINE+1];
 

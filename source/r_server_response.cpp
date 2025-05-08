@@ -124,7 +124,7 @@ string r_server_response::get_additional_header(const string& headerName)
     return string();
 }
 
-void r_server_response::write_response(r_stream_io& socket)
+void r_server_response::write_response(r_socket_base& socket)
 {
     _responseWritten = true;
 
@@ -184,7 +184,7 @@ void r_server_response::write_response(r_stream_io& socket)
     }
 }
 
-void r_server_response::write_chunk(r_stream_io& socket, size_t sizeChunk, const void* bits)
+void r_server_response::write_chunk(r_socket_base& socket, size_t sizeChunk, const void* bits)
 {
     _responseWritten = true;
 
@@ -206,7 +206,7 @@ void r_server_response::write_chunk(r_stream_io& socket, size_t sizeChunk, const
         R_STHROW( r_http_io_exception, ("Socket invalid."));
 }
 
-void r_server_response::write_chunk_finalizer(r_stream_io& socket)
+void r_server_response::write_chunk_finalizer(r_socket_base& socket)
 {
     string finalizer("0\r\n\r\n");
     socket.send(finalizer.c_str(), finalizer.length());
@@ -214,7 +214,7 @@ void r_server_response::write_chunk_finalizer(r_stream_io& socket)
         R_STHROW( r_http_io_exception, ("Socket invalid."));
 }
 
-void r_server_response::write_part(r_stream_io& socket,
+void r_server_response::write_part(r_socket_base& socket,
                                    const string& boundary,
                                    const map<string,string>& partHeaders,
                                    void* chunk,
@@ -257,7 +257,7 @@ void r_server_response::write_part(r_stream_io& socket,
         R_STHROW( r_http_io_exception, ("Socket invalid."));
 }
 
-void r_server_response::write_part_finalizer(r_stream_io& socket, const string& boundary)
+void r_server_response::write_part_finalizer(r_socket_base& socket, const string& boundary)
 {
     auto finalizerLine = r_string_utils::format("--%s--\r\n", boundary.c_str());
     socket.send(finalizerLine.c_str(), finalizerLine.length());
@@ -315,7 +315,7 @@ string r_server_response::_get_status_message(status_code sc) const
     R_STHROW(r_http_exception_generic, ("Unknown status code."));
 }
 
-bool r_server_response::_write_header(r_stream_io& socket)
+bool r_server_response::_write_header(r_socket_base& socket)
 {
     time_t now = time(0);
 #ifdef IS_LINUX

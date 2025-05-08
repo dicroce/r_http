@@ -3,7 +3,7 @@
 #define _r_http_r_client_request_h
 
 #include "r_utils/r_macro.h"
-#include "r_utils/interfaces/r_stream_io.h"
+#include "r_utils/interfaces/r_socket_base.h"
 #include "r_utils/r_string_utils.h"
 
 #include <unordered_map>
@@ -39,7 +39,7 @@ public:
 
     R_API void set_method( int method );
 
-    R_API void write_request( r_utils::r_stream_io& socket ) const;
+    R_API void write_request( r_utils::r_socket_base& socket ) const;
 
     R_API void set_accept_type( const std::string& acceptType );
 
@@ -57,7 +57,7 @@ public:
     R_API void set_body( const std::string& body );
 
 private:
-    std::string _get_headers_as_string( r_utils::r_stream_io& socket ) const;
+    std::string _get_headers_as_string( r_utils::r_socket_base& socket ) const;
 
     r_uri _uri;
     std::string _acceptType;

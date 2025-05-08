@@ -3,7 +3,7 @@
 #define r_http_r_server_response_h
 
 #include "r_http/r_status_codes.h"
-#include "r_utils/interfaces/r_stream_io.h"
+#include "r_utils/interfaces/r_socket_base.h"
 #include "r_utils/r_string_utils.h"
 #include "r_utils/r_macro.h"
 #include <vector>
@@ -58,27 +58,27 @@ public:
 
     R_API bool written() const { return _responseWritten; }
 
-    R_API void write_response(r_utils::r_stream_io& socket);
+    R_API void write_response(r_utils::r_socket_base& socket);
 
     // Chunked transfer encoding support...
-    R_API void write_chunk(r_utils::r_stream_io& socket, size_t sizeChunk, const void* bits);
-    R_API void write_chunk_finalizer(r_utils::r_stream_io& socket);
+    R_API void write_chunk(r_utils::r_socket_base& socket, size_t sizeChunk, const void* bits);
+    R_API void write_chunk_finalizer(r_utils::r_socket_base& socket);
 
     // Multipart mimetype support
     // WritePart() will automaticaly add a Content-Length header per
     // part.
 
-    R_API void write_part( r_utils::r_stream_io& socket,
+    R_API void write_part( r_utils::r_socket_base& socket,
                      const std::string& boundary,
                      const std::map<std::string,std::string>& partHeaders,
                      void* chunk,
                      uint32_t size );
 
-    R_API void write_part_finalizer(r_utils::r_stream_io& socket, const std::string& boundary);
+    R_API void write_part_finalizer(r_utils::r_socket_base& socket, const std::string& boundary);
 
 private:
     std::string _get_status_message(status_code sc) const;
-    bool _write_header(r_utils::r_stream_io& socket);
+    bool _write_header(r_utils::r_socket_base& socket);
 
     status_code _status;
     bool _connectionClose;
